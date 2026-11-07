@@ -11,6 +11,8 @@ This project is not affiliated with JUPAS or any university. Always confirm curr
 - Search by programme name, institution, or JS code, and filter by institution or funding category.
 - Select a programme to see the available requirements, score formula, grade conversions, statistics, and source links.
 - Use the calculator only when a programme is marked **可計算**. It reports a formula score, not admission probability or a prediction.
+- Compare a calculated score with published quartiles when available; the statistic year is shown separately because it may differ from the formula year.
+- Switch between light and dark themes. The site follows your device preference on first visit and remembers your theme choice in your browser.
 - Check the year shown beside each formula and each statistic. They may refer to different admission cycles.
 
 Historical scores are references, not admission cut-offs or guarantees. Missing values are not estimated. An unverified or unsupported formula is not used to produce a score.
@@ -25,7 +27,7 @@ The directory may be refreshed independently of admissions rules. A recent catal
 
 ## Privacy and public content
 
-DSE scores are calculated in your browser. The site does not send or save the grades you enter. It does request the public programme catalogue to display search results, and it loads typefaces from Google Fonts.
+DSE scores are calculated in your browser. The site does not send or save the grades you enter. It stores only your theme preference in browser storage, requests the public programme catalogue to display search results, and loads typefaces from Google Fonts.
 
 This public repository contains the website source, tests, and programme/admissions data used by the site. It does not contain user-entered grades, personal application records, conversation transcripts, or usage logs.
 

@@ -240,10 +240,11 @@ function findProgramme(code) {
 
 function showProgramme(programme) {
   state.selectedProgramme = programme;
-  $("#selected-programme").textContent = programme
+  const selectedProgramme = $("#selected-programme");
+  selectedProgramme.textContent = programme
     ? `${programme.institutionShort} · ${programme.titleZh || programme.title}`
     : "未找到課程，請檢查課程編號。";
-  $("#selected-programme").style.color = programme ? "#4c7352" : "#a2574c";
+  selectedProgramme.dataset.found = String(Boolean(programme));
   renderElectiveSubjects();
   renderCategoryCGrades();
   renderCategoryBGrades();
@@ -400,8 +401,47 @@ function openProgrammeDialog(programme) {
 function setResult(message, tone = "") {
   const result = $("#calc-result");
   result.className = `calc-result${tone ? ` ${tone}` : ""}`;
-  result.querySelector("p").textContent = message;
+  $("#calc-result-message").textContent = message;
   result.querySelector(".result-icon").textContent = tone === "success" ? "✓" : tone === "error" ? "×" : "!";
+  $("#score-comparison").hidden = true;
+  $("#score-comparison").innerHTML = "";
+  $("#result-details").hidden = true;
+}
+
+function showScoreComparison(programme, score) {
+  const statistics = programme.scoreStatistics;
+  const publishedQuartiles = [
+    ["下四分位數", statistics?.lowerQuartile],
+    ["中位數", statistics?.median],
+    ["上四分位數", statistics?.upperQuartile],
+  ].filter(([, value]) => Number.isFinite(value));
+  const year = statistics?.year ? `${statistics.year} 收生資料` : "收生統計年度未有標示";
+  const sourceLink = statistics?.sourceUrl
+    ? `<a href="${escapeHTML(statistics.sourceUrl)}" target="_blank" rel="noreferrer">官方統計來源 ↗</a>`
+    : "";
+  const quartileCards = publishedQuartiles.length
+    ? publishedQuartiles.map(([label, value]) => `
+        <div class="comparison-stat">
+          <span>${escapeHTML(label)}</span>
+          <strong>${escapeHTML(value)}</strong>
+        </div>`).join("")
+    : '<p class="comparison-unavailable">此課程目前未有可用的官方四分位收生統計。</p>';
+  const comparison = $("#score-comparison");
+  comparison.innerHTML = `
+    <div class="comparison-heading">
+      <strong>歷年收生分數 · ${escapeHTML(year)}</strong>
+      ${sourceLink}
+    </div>
+    <div class="comparison-grid">
+      <div class="comparison-stat comparison-estimate">
+        <span>你的估算分數</span>
+        <strong>${score.toFixed(2)}</strong>
+      </div>
+      ${quartileCards}
+    </div>
+    <p class="comparison-note">估算分數與歷年收生統計可能屬不同年度，只供參考，並非錄取預測。</p>`;
+  comparison.hidden = false;
+  $("#result-details").hidden = false;
 }
 
 function calculate() {
@@ -450,9 +490,34 @@ function calculate() {
   const historicText = /^2026/.test(result.cycle) ? `（${result.cycle} 歷史公式）` : "";
   const warningText = result.warning ? ` ${result.warning}` : "";
   setResult(`估算加權分數：${result.score.toFixed(2)}${bonusText}${historicText}。只按已核實的官方公式計算。${warningText}`, "success");
+  showScoreComparison(state.selectedProgramme, result.score);
 }
 
 function attachEvents() {
+  const themeToggle = $("#theme-toggle");
+  const updateThemeToggle = () => {
+    const isDark = document.documentElement.dataset.theme === "dark";
+    const label = isDark ? "切換淺色模式" : "切換深色模式";
+    themeToggle.setAttribute("aria-label", label);
+    themeToggle.setAttribute("aria-pressed", String(isDark));
+    themeToggle.title = label;
+    themeToggle.querySelector(".theme-toggle-label").textContent = isDark ? "淺色" : "深色";
+  };
+  updateThemeToggle();
+  themeToggle.addEventListener("click", () => {
+    const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = nextTheme;
+    $('meta[name="theme-color"]').content = nextTheme === "dark" ? "#151c17" : "#f6f7f3";
+    updateThemeToggle();
+    try {
+      localStorage.setItem("jupas-theme", nextTheme);
+    } catch (error) {
+      console.warn("Unable to save the theme preference.", error);
+    }
+  });
+  $("#result-details").addEventListener("click", () => {
+    if (state.selectedProgramme) openProgrammeDialog(state.selectedProgramme);
+  });
   $("#institution-filters").addEventListener("click", (event) => {
     const button = event.target.closest("[data-institution]");
     if (!button) return;
