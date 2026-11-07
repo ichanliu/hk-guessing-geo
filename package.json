@@ -1,0 +1,12 @@
+{
+  "name": "jupas-compass",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "sync:data": "node scripts/sync-admissions-data.mjs && node scripts/sync-jupas-catalog.mjs",
+    "sync:admissions": "node scripts/sync-admissions-data.mjs",
+    "test": "node --test"
+  }
+}
