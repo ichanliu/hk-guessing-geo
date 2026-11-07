@@ -139,6 +139,7 @@ function updateOverview() {
   $("#programme-count").textContent = state.programmes.length.toLocaleString("zh-HK");
   $("#verified-count").textContent = state.programmes.filter((programme) => programme.scoreModel?.calculatorSupported).length;
   $("#updated-date").textContent = state.catalogueUpdated || "—";
+  $("#guide-updated-date").textContent = state.catalogueUpdated || "—";
 }
 
 function renderGrades() {

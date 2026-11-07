@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="搜尋 2026/27 JUPAS 申請年度、2027/28 入學課程，並使用經官方核實的 DSE 加權計分器。"
+      content="搜尋 2026/27 JUPAS 課程、查閱官方收生要求與資料年度，並為公式已核實及支援的課程估算 DSE 加權分數。"
     />
     <meta name="theme-color" content="#f6f7f3" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="JUPAS Compass — 課程與 DSE 計分" />
+    <meta property="og:description" content="查閱 JUPAS 課程、官方來源與資料年度，使用已核實公式估算 DSE 分數。" />
+    <meta property="og:url" content="https://ichanliu.github.io/jupascompass/" />
     <title>JUPAS Compass — 課程與 DSE 計分</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,7 +41,7 @@
         <div class="hero-copy">
           <div class="eyebrow"><span class="eyebrow-line"></span> JUPAS ADMISSIONS, MADE CLEAR</div>
           <h1>揀課程，<span>有數有據。</span></h1>
-          <p>九所院校 · 官方課程編號 · 一個清晰的選科起點</p>
+          <p>九所院校 · 官方課程編號 · 明確標示公式年度與資料限制</p>
         </div>
         <div class="hero-aside">
           <div class="hero-aside-icon" aria-hidden="true">
@@ -47,8 +51,8 @@
             </svg>
           </div>
           <div>
-            <strong>只呈現核實資料</strong>
-            <span>分數與要求均附官方來源</span>
+            <strong>來源與年度清楚標示</strong>
+            <span>未核實的公式不作估算</span>
           </div>
         </div>
       </section>
@@ -167,20 +171,41 @@
         </aside>
       </section>
 
-      <section class="data-note" id="data-note">
-        <div class="data-note-icon" aria-hidden="true">↗</div>
-        <div>
-          <strong>以官方資料為準</strong>
-          <p>課程目錄及課程編號取自 JUPAS 網站。港大、科大、浸大、教大、理大、嶺大及都大的已核實公式適用於 2027/28 入學；城大公式尚未核實，不作估算。中大官方計算器目前仍屬 2026 入學週期。收生成績會標示統計年度，所有分數僅作參考，請以院校最新官方資料為準。</p>
+      <section class="data-note" id="data-note" aria-labelledby="data-note-title">
+        <div class="data-note-icon" aria-hidden="true">i</div>
+        <div class="data-note-copy">
+          <div class="data-note-heading">
+            <strong id="data-note-title">使用指南、資料來源與私隱</strong>
+            <span>本網站為獨立學生資訊工具，並非 JUPAS 或任何院校的官方網站。</span>
+          </div>
+          <div class="guide-grid">
+            <article>
+              <h3>如何使用</h3>
+              <p>搜尋課程名稱、院校或 JS 編號，再選擇課程查看要求、公式及來源。計分器只會為標示「可計算」的課程提供估算；請按欄位輸入 DSE 成績。</p>
+            </article>
+            <article>
+              <h3>如何理解資料</h3>
+              <p>課程目錄、計分公式及歷年收生統計可能來自不同年度，頁面會分別標示。未能核實或尚未支援的公式不會估算；歷年分數不是入學門檻或錄取預測。</p>
+            </article>
+            <article>
+              <h3>成績與私隱</h3>
+              <p>計分在你的瀏覽器內完成。輸入的成績不會上傳或保存；載入課程目錄時，瀏覽器會向本網站讀取公開資料檔案。</p>
+            </article>
+          </div>
+          <div class="data-note-footer">
+            <span>課程目錄同步日期：<strong id="guide-updated-date">—</strong></span>
+            <a href="https://github.com/ichanliu/jupascompass/issues" target="_blank" rel="noreferrer">回報資料問題 ↗</a>
+          </div>
         </div>
-        <a href="https://www.jupas.edu.hk/en/programmes-offered/" target="_blank" rel="noreferrer">前往 JUPAS 官方網站 ↗</a>
+        <a class="data-note-official" href="https://www.jupas.edu.hk/en/programmes-offered/" target="_blank" rel="noreferrer">查閱 JUPAS 官方目錄 ↗</a>
       </section>
     </main>
 
     <footer>
       <a class="brand brand-footer" href="./"><span class="brand-mark" aria-hidden="true">J</span><span class="brand-name">JUPAS<span>COMPASS</span></span></a>
       <span>為香港學生而設的 JUPAS 課程指南</span>
-      <span>非 JUPAS 或院校官方網站</span>
+      <span>獨立資訊工具 · 非官方網站</span>
+      <a href="https://github.com/ichanliu/jupascompass" target="_blank" rel="noreferrer">網站原始碼 ↗</a>
     </footer>
 
     <dialog id="programme-dialog" class="programme-dialog">
