@@ -19,6 +19,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+HK:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script src="./src/theme.js"></script>
     <link rel="stylesheet" href="./styles.css" />
     <script type="module" src="./src/app.js"></script>
   </head>
@@ -34,6 +35,16 @@
         <a href="#data-note">資料來源</a>
       </nav>
       <div class="topbar-meta"><span class="live-dot"></span> 2026/27 申請 · 2027/28 入學</div>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切換深色模式" aria-pressed="false" title="切換深色模式">
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20.2 15.1A8.4 8.4 0 0 1 8.9 3.8 8.6 8.6 0 1 0 20.2 15Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7" />
+          <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+        </svg>
+        <span class="theme-toggle-label">深色</span>
+      </button>
     </header>
 
     <main>
@@ -165,7 +176,11 @@
 
           <div class="calc-result" id="calc-result" aria-live="polite">
             <span class="result-icon" aria-hidden="true">!</span>
-            <p>只有已核實官方公式的課程可計算；不同院校的公式與統計資料可能屬不同入學年度。</p>
+            <div class="calc-result-body">
+              <p id="calc-result-message">只有已核實官方公式的課程可計算；不同院校的公式與統計資料可能屬不同入學年度。</p>
+              <div class="score-comparison" id="score-comparison" hidden></div>
+              <button class="result-details-button" id="result-details" type="button" hidden>查看課程詳情與官方來源 ↗</button>
+            </div>
           </div>
           <div class="calc-footnote">估算不代表錄取機會或正式遴選結果；中大目前只提供 2026 入學週期公式作歷史參考。</div>
         </aside>
@@ -189,7 +204,7 @@
             </article>
             <article>
               <h3>成績與私隱</h3>
-              <p>計分在你的瀏覽器內完成。輸入的成績不會上傳或保存；載入課程目錄時，瀏覽器會向本網站讀取公開資料檔案。</p>
+              <p>計分在你的瀏覽器內完成，輸入的成績不會上傳或保存。網站只會在瀏覽器記住你選擇的色彩主題；載入課程目錄時會讀取公開資料檔案。</p>
             </article>
           </div>
           <div class="data-note-footer">
